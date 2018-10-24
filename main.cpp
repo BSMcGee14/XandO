@@ -1,4 +1,4 @@
-//Author:
+//Author:Brandan McGee
 #include <iostream>
 
 using namespace std;
@@ -25,20 +25,21 @@ int main()
 
   do
   {
-    cout<<turn<<"'s turn.\n";
-    cout<<"Which column and row (0-2, or -1 for both to quit)?\n";
-    cin>>column;
-    cin>>row;
+    cout << turn << "'s turn.\n";
+    cout << "Which column and row (0-2, or -1 for both to quit)?\n";
+    cin >> column;
+    cin >> row;
 
     //Make sure the user isn't quitting
     if(column == QUIT && row == QUIT)
     {
       playing = false;
     }
+
     //Print error if the column and/or row is out of bounds of 0-2
-    else if( column < 0 || row < 0 || column > 2 || row > 2 )
+    else if(column < 0 || row < 0 || column > 2 || row > 2)
     {
-      cout<<"Values must be between 0 and 2.\n";
+      cout << "Values must be between 0 and 2.\n";
     }
     //TODO: Place the piece and swap turns
     //Outline
@@ -48,8 +49,19 @@ int main()
     //1-B-1.  turn should be assigned the value 'O'
     //1-C.  In any other case, then...
     //1-C-1.  turn should be assigned the value 'X'
+
+    else if(turn == X)
+    {
+        board[row][column] = X;
+        turn = O;
+    }
+    else 
+    {
+        board[row][column] = O;
+        turn = X;
+    }
     
-    cout<<"\nBOARD\n-----\n";
+    cout << "\nBOARD\n-----\n";
     //TODO: Print the current board
     //Outline
     //1. Traverse through each row, calling the current row r
@@ -57,10 +69,19 @@ int main()
     //1-A-1.  Display the value of the board at location of r and c
     //1-A-2. Display a space
     //1-B. Display an newline to move to the next row of the board
-    
-  }while( playing );
+    for(int r = 0; r < ROWS; r++)
+    {
+        for(int c = 0; c < COLUMNS; c++)
+        {
+            cout << board[r][c] << " ";
+        }
 
-  cout<<"Goodbye!\n";
+        cout << endl;
+    }
+    
+  }while(playing);
+
+  cout << "Goodbye!\n";
 
   return 0;
 }
